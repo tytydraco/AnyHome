@@ -6,11 +6,8 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.draco.anyhome.models.AppInfo
-import java.util.*
 
 class SelectActivityViewModel(application: Application) : AndroidViewModel(application) {
-    private val context = application.applicationContext
-
     private val _appList = MutableLiveData<List<AppInfo>>()
     val appList: LiveData<List<AppInfo>> = _appList
 
@@ -19,6 +16,8 @@ class SelectActivityViewModel(application: Application) : AndroidViewModel(appli
     }
 
     fun updateList() {
+        val context = getApplication<Application>().applicationContext
+
         val launcherIntent = Intent(Intent.ACTION_MAIN, null).apply {
             addCategory(Intent.CATEGORY_LAUNCHER)
         }
@@ -39,7 +38,7 @@ class SelectActivityViewModel(application: Application) : AndroidViewModel(appli
         }
 
         newAppList.sortBy {
-            it.label.toLowerCase(Locale.getDefault())
+            it.label.lowercase()
         }
 
         if (!_appList.value?.toTypedArray().contentEquals(newAppList.toTypedArray()))
