@@ -18,7 +18,6 @@
         android:layout_height="wrap_content"
         android:lines="1"
         android:ellipsize="end"
-        android:textColor="@android:color/white"
         android:textSize="18sp"
         android:id="@+id/name" />
 </LinearLayout>
